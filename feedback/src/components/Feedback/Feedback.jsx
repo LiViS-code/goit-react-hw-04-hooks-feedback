@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Container, Title, StatisticsTitle } from "./Feedback.styled";
-import FeedbackOptions from "./FeedbackOptions";
-import Statistics from "./Statistics";
-import NotificationMessage from "./NotificationMessage";
+import FeedbackOptions from "../FeedbackOptions/FeedbackOptions";
+import Statistics from "../Statistics/Statistics";
+import NotificationMessage from "../NotificationMessage/NotificationMessage";
+
 class Feedback extends Component {
   totalFeedback = 0;
   positiveFeedbackPercentage = 0;

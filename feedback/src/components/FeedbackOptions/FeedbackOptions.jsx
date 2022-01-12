@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { ListButton, ListButtonItem, Button } from "./Feedback.styled";
+import {
+  ListButton,
+  ListButtonItem,
+  Button,
+} from "../Feedback/Feedback.styled";
 
 class FeedbackOptions extends Component {
   controlBtn = [
