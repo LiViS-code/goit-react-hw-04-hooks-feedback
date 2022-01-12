@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Message } from "../Feedback/Feedback.styled";
+import { Message } from "./NotificationMessage.styled";
 
 class NotificationMessage extends Component {
   render() {

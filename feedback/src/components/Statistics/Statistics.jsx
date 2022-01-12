@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ListFeedback, FeedbackItem, Value } from "../Feedback/Feedback.styled";
+import { ListFeedback, FeedbackItem, Value } from "./Statistics.styled";
 
 class Statistics extends Component {
   render() {
