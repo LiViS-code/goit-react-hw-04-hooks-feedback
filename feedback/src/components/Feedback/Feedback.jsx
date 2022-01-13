@@ -1,63 +1,66 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Container, Title, StatisticsTitle } from "./Feedback.styled";
 import FeedbackOptions from "../FeedbackOptions/FeedbackOptions";
 import Statistics from "../Statistics/Statistics";
 import NotificationMessage from "../NotificationMessage/NotificationMessage";
 
-class Feedback extends Component {
-  totalFeedback = 0;
-  positiveFeedbackPercentage = 0;
+export default function Feedback() {
+  let totalFeedback = 0;
+  let positiveFeedbackPercentage = 0;
+  const [goodCount, setGoodCount] = useState(0);
+  const [neutralCount, setNeutralCount] = useState(0);
+  const [badCount, setBadCount] = useState(0);
 
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+  const handleIncrement = (key) => {
+    console.log("click", typeof key);
+    switch (key) {
+      case "good":
+        setGoodCount((c) => c + 1);
+        break;
+
+      case "neutral":
+        setNeutralCount((c) => c + 1);
+        break;
+
+      case "bad":
+        setBadCount((c) => c + 1);
+        break;
+
+      default:
+        return;
+    }
   };
 
-  handleIncrement = (k) => {
-    this.setState((state) => ({ [k]: state[k] + 1 }));
-  };
+  totalFeedback = goodCount + neutralCount + badCount;
 
-  countTotalFeedback() {
-    this.totalFeedback = this.state.good + this.state.neutral + this.state.bad;
-    return this.totalFeedback;
+  function countPositiveFeedbackPercentage(n, total) {
+    positiveFeedbackPercentage =
+      totalFeedback === 0 ? 0 : Math.round((n / total) * 100);
+    return positiveFeedbackPercentage;
   }
 
-  countPositiveFeedbackPercentage() {
-    this.positiveFeedbackPercentage =
-      this.totalFeedback === 0
-        ? 0
-        : Math.round((this.state.good / this.totalFeedback) * 100);
-    return this.positiveFeedbackPercentage;
-  }
+  return (
+    <Container>
+      <Title>Please leave feedback</Title>
 
-  render() {
-    const { handleIncrement } = this;
+      <FeedbackOptions handleIncrement={handleIncrement} />
 
-    this.countTotalFeedback();
-    this.countPositiveFeedbackPercentage();
-    return (
-      <Container>
-        <Title>Please leave feedback</Title>
+      <StatisticsTitle>Statistics</StatisticsTitle>
 
-        <FeedbackOptions handleIncrement={handleIncrement} />
-
-        <StatisticsTitle>Statistics</StatisticsTitle>
-
-        {this.totalFeedback > 0 ? (
-          <Statistics
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
-            total={this.totalFeedback}
-            positivePercentage={this.positiveFeedbackPercentage}
-          />
-        ) : (
-          <NotificationMessage />
-        )}
-      </Container>
-    );
-  }
+      {totalFeedback > 0 ? (
+        <Statistics
+          good={goodCount}
+          neutral={neutralCount}
+          bad={badCount}
+          total={totalFeedback}
+          positivePercentage={countPositiveFeedbackPercentage(
+            goodCount,
+            totalFeedback
+          )}
+        />
+      ) : (
+        <NotificationMessage />
+      )}
+    </Container>
+  );
 }
-
-export default Feedback;
