@@ -45,10 +45,10 @@ export default function Feedback() {
 
       {totalFeedback > 0 ? (
         <Statistics
-          good={goodCount}
-          neutral={neutralCount}
-          bad={badCount}
-          total={totalFeedback}
+          goodCount={goodCount}
+          neutralCount={neutralCount}
+          badCount={badCount}
+          totalFeedback={totalFeedback}
           positivePercentage={positiveFeedbackPercentage}
         />
       ) : (
