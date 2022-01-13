@@ -12,7 +12,6 @@ export default function Feedback() {
   const [badCount, setBadCount] = useState(0);
 
   const handleIncrement = (key) => {
-    console.log("click", typeof key);
     switch (key) {
       case "good":
         setGoodCount((c) => c + 1);
@@ -33,11 +32,8 @@ export default function Feedback() {
 
   totalFeedback = goodCount + neutralCount + badCount;
 
-  function countPositiveFeedbackPercentage(n, total) {
-    positiveFeedbackPercentage =
-      totalFeedback === 0 ? 0 : Math.round((n / total) * 100);
-    return positiveFeedbackPercentage;
-  }
+  positiveFeedbackPercentage =
+    totalFeedback === 0 ? 0 : Math.round((goodCount / totalFeedback) * 100);
 
   return (
     <Container>
@@ -53,10 +49,7 @@ export default function Feedback() {
           neutral={neutralCount}
           bad={badCount}
           total={totalFeedback}
-          positivePercentage={countPositiveFeedbackPercentage(
-            goodCount,
-            totalFeedback
-          )}
+          positivePercentage={positiveFeedbackPercentage}
         />
       ) : (
         <NotificationMessage />
