@@ -1,28 +1,20 @@
-import React, { Component } from "react";
 import { ListButton, ListButtonItem, Button } from "./FeedbackOptions.styled";
 
-class FeedbackOptions extends Component {
-  controlBtn = [
+export default function FeedbackOptions({ handleIncrement }) {
+  const controlBtn = [
     { key: "id-1", name: "good" },
     { key: "id-2", name: "neutral" },
     { key: "id-3", name: "bad" },
   ];
-  render() {
-    return (
-      <ListButton>
-        {this.controlBtn.map(({ key, name }) => (
-          <ListButtonItem key={key}>
-            <Button
-              type="button"
-              onClick={() => this.props.handleIncrement(name)}
-            >
-              {name}
-            </Button>
-          </ListButtonItem>
-        ))}
-      </ListButton>
-    );
-  }
+  return (
+    <ListButton>
+      {controlBtn.map(({ key, name }) => (
+        <ListButtonItem key={key}>
+          <Button type="button" onClick={() => handleIncrement(name)}>
+            {name}
+          </Button>
+        </ListButtonItem>
+      ))}
+    </ListButton>
+  );
 }
-
-export default FeedbackOptions;
